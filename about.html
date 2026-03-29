@@ -1,0 +1,347 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>About Us — RDA Industries</title>
+  <link rel="stylesheet" href="style.css" />
+  <style>
+    .about-split {
+      padding: 100px 10%;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 80px; align-items: start;
+    }
+    @media(max-width:768px){ .about-split { grid-template-columns:1fr; gap:40px; } }
+    .about-split p { font-size: 15px; color: var(--text-muted); line-height: 1.9; margin-bottom: 18px; }
+    .about-split p strong { color: var(--amber); font-weight: 600; }
+
+    .founder-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-top: 3px solid var(--amber);
+      border-radius: 6px;
+      padding: 36px;
+      margin-bottom: 24px;
+    }
+    .founder-initials {
+      width: 64px; height: 64px; border-radius: 50%;
+      background: rgba(232,136,26,0.15);
+      border: 2px solid rgba(232,136,26,0.4);
+      display: flex; align-items: center; justify-content: center;
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 22px; letter-spacing: 2px; color: var(--amber);
+      margin-bottom: 18px;
+    }
+    .founder-name {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 26px; letter-spacing: 2px; color: var(--text-main);
+      margin-bottom: 4px;
+    }
+    .founder-role {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 12px; font-weight: 700;
+      letter-spacing: 3px; text-transform: uppercase;
+      color: var(--amber); margin-bottom: 16px;
+    }
+    .founder-bio { font-size: 14px; color: var(--text-muted); line-height: 1.8; }
+
+    .info-block {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      padding: 28px;
+    }
+    .info-row {
+      display: flex; justify-content: space-between; align-items: flex-start;
+      padding: 14px 0;
+      border-bottom: 1px solid var(--border);
+      font-size: 14px;
+    }
+    .info-row:last-child { border-bottom: none; }
+    .info-key {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 11px; font-weight: 700;
+      letter-spacing: 2px; text-transform: uppercase;
+      color: var(--amber);
+      flex: 0 0 120px;
+    }
+    .info-val { color: var(--steel-lt); text-align: right; line-height: 1.5; }
+
+    /* TIMELINE */
+    .timeline-section { padding: 100px 10%; background: var(--bg-dark); }
+    .timeline { max-width: 700px; margin: 48px auto 0; position: relative; }
+    .timeline::before {
+      content: ''; position: absolute;
+      left: 20px; top: 0; bottom: 0; width: 1px;
+      background: linear-gradient(to bottom, var(--amber), var(--border), transparent);
+    }
+    .tl-item { display: flex; gap: 40px; margin-bottom: 48px; }
+    .tl-dot {
+      flex-shrink: 0; width: 40px; height: 40px;
+      background: var(--bg-dark); border: 2px solid var(--amber);
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-family: 'Bebas Neue', sans-serif; font-size: 11px; color: var(--amber);
+      position: relative; z-index: 1;
+    }
+    .tl-content { padding-top: 8px; }
+    .tl-date {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 11px; font-weight: 700;
+      letter-spacing: 3px; text-transform: uppercase;
+      color: var(--amber); margin-bottom: 6px;
+    }
+    .tl-title {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 20px; font-weight: 700; color: var(--text-main);
+      margin-bottom: 8px;
+    }
+    .tl-text { font-size: 14px; color: var(--text-muted); line-height: 1.7; }
+
+    /* VALUES */
+    .values-section { padding: 100px 10%; }
+    .values-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 20px; margin-top: 48px; }
+    .value-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      padding: 32px 24px;
+      transition: transform 0.3s, border-color 0.3s;
+    }
+    .value-card:hover { transform: translateY(-4px); border-color: var(--amber-dim); }
+    .value-icon { font-size: 32px; margin-bottom: 16px; }
+    .value-title {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 20px; font-weight: 700; color: var(--text-main);
+      margin-bottom: 10px;
+    }
+    .value-text { font-size: 13px; color: var(--text-muted); line-height: 1.7; }
+
+    /* TEAM */
+    .team-section { padding: 80px 10%; background: var(--bg-dark); }
+    .team-banner {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 48px; align-items: center;
+      background: var(--bg-card); border: 1px solid var(--border);
+      border-left: 4px solid var(--amber);
+      border-radius: 0 6px 6px 0;
+      padding: 48px;
+      margin-top: 40px;
+    }
+    @media(max-width:768px){ .team-banner { grid-template-columns:1fr; gap:24px; } }
+    .team-big { font-family: 'Bebas Neue', sans-serif; font-size: 80px; color: var(--amber); line-height: 1; }
+    .team-label { font-family: 'Barlow Condensed', sans-serif; font-size: 13px; font-weight: 700; letter-spacing: 3px; text-transform: uppercase; color: var(--text-muted); }
+    .team-desc { font-size: 15px; color: var(--text-muted); line-height: 1.8; }
+    .team-desc strong { color: var(--text-main); }
+  </style>
+</head>
+<body>
+
+<nav id="navbar">
+  <a class="nav-logo" href="index.html">
+    <img class="nav-logo-img" src="rda-logo.jpeg" alt="RDA Industries Logo" />
+    <div class="nav-logo-text">
+      <div class="nav-logo-name">RDA</div>
+      <div class="nav-logo-sub">Industries</div>
+    </div>
+  </a>
+  <ul class="nav-links" id="navLinks">
+    <li><a href="index.html">Home</a></li>
+    <li><a href="about.html" class="active">About</a></li>
+    <li><a href="products.html">Products</a></li>
+    <li><a href="machinery.html">Machinery</a></li>
+    <li><a href="quality.html">Quality</a></li>
+    <li><a href="contact.html">Contact</a></li>
+  </ul>
+  <a href="contact.html" class="nav-cta">Get a Quote</a>
+  <div class="hamburger" onclick="toggleNav()"><span></span><span></span><span></span></div>
+</nav>
+
+<div class="page-hero">
+  <div class="hero-eyebrow">Our Story</div>
+  <h1 class="hero-title">About <em>RDA</em><br>Industries</h1>
+  <p class="hero-sub">A passionate team of 10 professionals committed to precision manufacturing for domestic and global markets.</p>
+</div>
+
+<!-- ABOUT SPLIT -->
+<div class="about-split">
+  <div>
+    <div class="section-label">Company Profile</div>
+    <h2 class="section-title" style="font-size:36px; margin-bottom:28px;">Who We <em>Are</em></h2>
+    <p><strong>M/S RDA Industries</strong> is a reliable manufacturer for Auto Parts, Tractor Parts, and Precision Parts — and a supplier of an array of Alloy Steel Products.</p>
+    <p>Our product range includes <strong>Low, Medium & High Carbon Steel</strong>, Alloy Steel, Free Cutting Steel, Stainless Steel, and Forging and Investment Casting. All alloy steel products are zinc-plated for protection from rust.</p>
+    <p>Our target is clearly defined: to achieve quality not only dimensionally, physically and chemically — but with outlook and packaging as per the customers' requirements, meeting all service requirements of logistics.</p>
+    <p>We look forward to a long-term business association with manufacturers for our domestic as well as export unit, supplying automobile components to both domestic and international markets.</p>
+    <a href="contact.html" class="btn btn-amber" style="margin-top:8px;">Partner With Us →</a>
+  </div>
+  <div>
+    <div class="founder-card">
+      <div class="founder-initials">RD</div>
+      <div class="founder-name">Rajat Dhiman</div>
+      <div class="founder-role">Founder & Director</div>
+      <p class="founder-bio">Under the guidance of Mr. Rajat Dhiman, RDA Industries has grown by leaps and bounds since its incorporation. His vision of combining quality manufacturing with customer-centric service has shaped every aspect of the company.</p>
+    </div>
+    <div class="info-block">
+      <div class="info-row">
+        <span class="info-key">Founded</span>
+        <span class="info-val">September 2025</span>
+      </div>
+      <div class="info-row">
+        <span class="info-key">Location</span>
+        <span class="info-val">Hoshiarpur, Punjab, India</span>
+      </div>
+      <div class="info-row">
+        <span class="info-key">Team Size</span>
+        <span class="info-val">10 Professionals</span>
+      </div>
+      <div class="info-row">
+        <span class="info-key">Markets</span>
+        <span class="info-val">Domestic & Export</span>
+      </div>
+      <div class="info-row">
+        <span class="info-key">Speciality</span>
+        <span class="info-val">Auto, Tractor & Precision Parts</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="divider"></div>
+
+<!-- TIMELINE -->
+<div class="timeline-section">
+  <div class="section-label">Our Journey</div>
+  <h2 class="section-title">Growing <em>Fast</em></h2>
+  <div class="timeline">
+    <div class="tl-item">
+      <div class="tl-dot">▶</div>
+      <div class="tl-content">
+        <div class="tl-date">September 2025</div>
+        <div class="tl-title">RDA Industries Founded</div>
+        <div class="tl-text">Incorporated in Hoshiarpur, Punjab under the leadership of Mr. Rajat Dhiman. Operations launched with a core team of 10 dedicated professionals.</div>
+      </div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-dot">▶</div>
+      <div class="tl-content">
+        <div class="tl-date">Late 2025</div>
+        <div class="tl-title">CNC Facility Established</div>
+        <div class="tl-text">Installed 2 LMW CNC Turning Centers and 1 VMC unit along with Bandsaw machinery to power full-scale precision manufacturing.</div>
+      </div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-dot">▶</div>
+      <div class="tl-content">
+        <div class="tl-date">2026</div>
+        <div class="tl-title">Export Markets Targeted</div>
+        <div class="tl-text">RDA Industries expands its vision to serve international markets, with packaging and logistics aligned to global standards.</div>
+      </div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-dot">▶</div>
+      <div class="tl-content">
+        <div class="tl-date">Future</div>
+        <div class="tl-title">Continued Growth</div>
+        <div class="tl-text">Committed to long-term partnerships with manufacturers worldwide, expanding our product range and production capacity.</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- VALUES -->
+<div class="values-section">
+  <div class="section-label">What We Stand For</div>
+  <h2 class="section-title">Our Core <em>Values</em></h2>
+  <div class="values-grid">
+    <div class="value-card">
+      <div class="value-icon">🎯</div>
+      <div class="value-title">Precision First</div>
+      <div class="value-text">Dimensional, physical and chemical quality — every part checked at every stage of manufacturing.</div>
+    </div>
+    <div class="value-card">
+      <div class="value-icon">🤝</div>
+      <div class="value-title">Long-term Partnerships</div>
+      <div class="value-text">We build lasting business relationships with manufacturers for mutual growth in domestic and international markets.</div>
+    </div>
+    <div class="value-card">
+      <div class="value-icon">🌍</div>
+      <div class="value-title">Export Ready</div>
+      <div class="value-text">Packaging, logistics and quality aligned to serve both domestic buyers and international supply chains.</div>
+    </div>
+    <div class="value-card">
+      <div class="value-icon">💪</div>
+      <div class="value-title">Dedicated Team</div>
+      <div class="value-text">10 energetic, qualified professionals committed to delivering the best product every single time.</div>
+    </div>
+  </div>
+</div>
+
+<!-- TEAM -->
+<div class="team-section">
+  <div class="section-label">Our People</div>
+  <h2 class="section-title">The <em>Team</em></h2>
+  <div class="team-banner">
+    <div>
+      <div class="team-big">10</div>
+      <div class="team-label">Core Team Members</div>
+    </div>
+    <div class="team-desc">
+      RDA Industries is powered by an <strong>energetic and qualified team of 10 professionals</strong> — machinists, quality inspectors, and operations staff — all working under the guidance of <strong>Mr. Rajat Dhiman</strong> to deliver precision parts that meet world-class standards.
+    </div>
+  </div>
+</div>
+
+<footer>
+  <div class="footer-grid">
+    <div>
+      <div class="footer-logo" style="display:flex;align-items:center;gap:12px;margin-bottom:12px;">
+        <img src="rda-logo.jpeg" alt="RDA Logo" style="width:48px;height:48px;border-radius:50%;border:1px solid #2a3d5e;object-fit:cover;" />
+        <div>
+          <div style="font-family:Bebas Neue,sans-serif;font-size:26px;letter-spacing:4px;color:#e0e8f5;line-height:1;">RDA</div>
+          <div style="font-family:Barlow Condensed,sans-serif;font-size:9px;letter-spacing:3px;color:#6a7f9a;font-weight:600;text-transform:uppercase;">Industries</div>
+        </div>
+      </div>
+      <p class="footer-desc">A reliable manufacturer of auto parts, tractor parts and precision components. Hoshiarpur, Punjab, India.</p>
+    </div>
+    <div>
+      <div class="footer-heading">Navigation</div>
+      <ul class="footer-links">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="about.html">About Us</a></li>
+        <li><a href="products.html">Products</a></li>
+        <li><a href="machinery.html">Machinery</a></li>
+        <li><a href="quality.html">Quality</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+    </div>
+    <div>
+      <div class="footer-heading">Contact</div>
+      <div class="footer-contact-item">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
+        Hoshiarpur, Punjab - 146022, India
+      </div>
+      <div class="footer-contact-item">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 9.81 19.79 19.79 0 01.01 1.18 2 2 0 012 .02h3a2 2 0 012 1.72 12.84 12.84 0 00.7 2.81 2 2 0 01-.45 2.11L6.09 7.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45 12.84 12.84 0 002.81.7A2 2 0 0122 14.92z"/></svg>
+        +91 98148 72745
+      </div>
+      <div class="footer-contact-item">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+        <a href="mailto:rajat.dhiman@rdaindustries.co.in">rajat.dhiman@rdaindustries.co.in</a>
+      </div>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span>© 2025 RDA Industries. All rights reserved.</span>
+    <span>Hoshiarpur · Punjab · India</span>
+  </div>
+</footer>
+
+<script>
+  function toggleNav() { document.getElementById('navLinks').classList.toggle('open'); }
+  window.addEventListener('scroll', () => {
+    document.getElementById('navbar').style.background =
+      window.scrollY > 20 ? 'rgba(10,14,26,0.98)' : 'rgba(10,14,26,0.92)';
+  });
+</script>
+</body>
+</html>

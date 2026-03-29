@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Quality Assurance — RDA Industries</title>
+  <link rel="stylesheet" href="style.css" />
+  <style>
+    .quality-intro { padding: 80px 10%; display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: start; }
+    @media(max-width:768px){ .quality-intro { grid-template-columns:1fr; gap:40px; } }
+    .quality-intro p { font-size: 15px; color: var(--text-muted); line-height: 1.85; margin-bottom: 16px; }
+    .quality-intro p strong { color: var(--amber); }
+    .q-badge-stack { display: flex; flex-direction: column; gap: 16px; }
+    .q-badge {
+      display: flex; align-items: center; gap: 20px;
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-left: 3px solid var(--amber);
+      border-radius: 0 6px 6px 0;
+      padding: 20px 24px;
+    }
+    .q-badge-icon { font-size: 28px; flex-shrink: 0; }
+    .q-badge-title { font-family: 'Barlow Condensed', sans-serif; font-size: 16px; font-weight: 700; color: var(--text-main); margin-bottom: 4px; }
+    .q-badge-text { font-size: 12px; color: var(--text-muted); }
+
+    /* INSTRUMENTS */
+    .instruments-section { padding: 80px 10%; background: var(--bg-dark); }
+    .instruments-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 20px; margin-top: 48px; }
+    .instrument-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      padding: 28px;
+      transition: transform 0.3s, border-color 0.3s;
+      position: relative; overflow: hidden;
+    }
+    .instrument-card:hover { transform: translateY(-4px); border-color: var(--amber-dim); }
+    .instrument-card::before {
+      content: '';
+      position: absolute; top: 0; left: 0; right: 0; height: 2px;
+      background: var(--amber); transform: scaleX(0);
+      transform-origin: left; transition: transform 0.3s;
+    }
+    .instrument-card:hover::before { transform: scaleX(1); }
+    .instrument-icon { font-size: 36px; margin-bottom: 16px; }
+    .instrument-name { font-family: 'Barlow Condensed', sans-serif; font-size: 19px; font-weight: 700; color: var(--text-main); margin-bottom: 8px; }
+    .instrument-desc { font-size: 12px; color: var(--text-muted); line-height: 1.6; }
+    .instrument-spec {
+      display: inline-block; margin-top: 12px;
+      background: rgba(232,136,26,0.1); color: var(--amber);
+      font-size: 10px; font-weight: 700; letter-spacing: 2px;
+      text-transform: uppercase; padding: 3px 10px; border-radius: 2px;
+    }
+
+    /* QC PROCESS */
+    .qc-process { padding: 80px 10%; }
+    .qc-flow { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 24px; margin-top: 48px; }
+    .qc-step {
+      text-align: center; padding: 32px 20px;
+      background: var(--bg-card); border: 1px solid var(--border); border-radius: 6px;
+      transition: transform 0.3s, border-color 0.3s;
+    }
+    .qc-step:hover { transform: translateY(-4px); border-color: var(--amber-dim); }
+    .qc-step-num {
+      width: 48px; height: 48px; border-radius: 50%;
+      background: rgba(232,136,26,0.12);
+      border: 2px solid rgba(232,136,26,0.3);
+      display: flex; align-items: center; justify-content: center;
+      font-family: 'Bebas Neue', sans-serif; font-size: 20px; color: var(--amber);
+      margin: 0 auto 16px;
+    }
+    .qc-step-title { font-family: 'Barlow Condensed', sans-serif; font-size: 16px; font-weight: 700; color: var(--text-main); margin-bottom: 8px; }
+    .qc-step-text { font-size: 12px; color: var(--text-muted); line-height: 1.6; }
+
+    /* COMMITMENT */
+    .commitment-section { padding: 80px 10%; background: var(--bg-dark); }
+    .commitment-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; margin-top: 48px; }
+    @media(max-width:768px){ .commitment-grid { grid-template-columns:1fr; } }
+    .commit-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      padding: 36px;
+    }
+    .commit-icon { font-size: 40px; margin-bottom: 20px; }
+    .commit-title { font-family: 'Bebas Neue', sans-serif; font-size: 28px; letter-spacing: 2px; color: var(--text-main); margin-bottom: 12px; }
+    .commit-text { font-size: 14px; color: var(--text-muted); line-height: 1.8; }
+
+    /* DIMENSIONS TABLE */
+    .dimensions-section { padding: 80px 10%; }
+    .table-wrapper { background: var(--bg-card); border: 1px solid var(--border); border-radius: 6px; overflow: hidden; margin-top: 40px; }
+  </style>
+</head>
+<body>
+
+<nav id="navbar">
+  <a class="nav-logo" href="index.html">
+    <img class="nav-logo-img" src="rda-logo.jpeg" alt="RDA Industries Logo" />
+    <div class="nav-logo-text">
+      <div class="nav-logo-name">RDA</div>
+      <div class="nav-logo-sub">Industries</div>
+    </div>
+  </a>
+  <ul class="nav-links" id="navLinks">
+    <li><a href="index.html">Home</a></li>
+    <li><a href="about.html">About</a></li>
+    <li><a href="products.html">Products</a></li>
+    <li><a href="machinery.html">Machinery</a></li>
+    <li><a href="quality.html" class="active">Quality</a></li>
+    <li><a href="contact.html">Contact</a></li>
+  </ul>
+  <a href="contact.html" class="nav-cta">Get a Quote</a>
+  <div class="hamburger" onclick="toggleNav()"><span></span><span></span><span></span></div>
+</nav>
+
+<div class="page-hero">
+  <div class="hero-eyebrow">Our Commitment</div>
+  <h1 class="hero-title">Quality <em>Assurance</em></h1>
+  <p class="hero-sub">World-class quality controls at every stage — from raw material to final dispatch. Quality is our culture, not a checkbox.</p>
+</div>
+
+<!-- INTRO -->
+<div class="quality-intro">
+  <div>
+    <div class="section-label">Quality Philosophy</div>
+    <h2 class="section-title" style="font-size:36px; margin-bottom:24px;">Quality is Our <em>Culture</em></h2>
+    <p>At RDA Industries, all products are manufactured under <strong>stringent quality control methods</strong>. Quality has become integrated with our culture and the quality system used is in compliance with the best standards in the world.</p>
+    <p>Our technicians monitor the production process to ensure high quality international standards. We use the <strong>best raw material</strong> and adopt strict quality control methods, supervised by a team of most educated and technically qualified inspectors.</p>
+    <p>Quality assurance occurs at <strong>all stages of manufacturing</strong> — right from raw material inspection through to the final alloy steel product — ensuring every dimension, physical property and chemical composition meets specification.</p>
+  </div>
+  <div>
+    <div class="q-badge-stack">
+      <div class="q-badge">
+        <div class="q-badge-icon">🎯</div>
+        <div>
+          <div class="q-badge-title">Dimensional Accuracy</div>
+          <div class="q-badge-text">Every part checked for exact dimensional compliance</div>
+        </div>
+      </div>
+      <div class="q-badge">
+        <div class="q-badge-icon">🔬</div>
+        <div>
+          <div class="q-badge-title">Physical Testing</div>
+          <div class="q-badge-text">Hardness, tensile and mechanical property verification</div>
+        </div>
+      </div>
+      <div class="q-badge">
+        <div class="q-badge-icon">⚗️</div>
+        <div>
+          <div class="q-badge-title">Chemical Compliance</div>
+          <div class="q-badge-text">Material chemical composition verified against standards</div>
+        </div>
+      </div>
+      <div class="q-badge">
+        <div class="q-badge-icon">📦</div>
+        <div>
+          <div class="q-badge-title">Packaging & Outlook</div>
+          <div class="q-badge-text">Products packed as per customer specifications</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- INSTRUMENTS -->
+<div class="instruments-section">
+  <div class="section-label">Testing Equipment</div>
+  <h2 class="section-title">Checking <em>Aids</em></h2>
+  <div class="instruments-grid">
+    <div class="instrument-card">
+      <div class="instrument-icon">📐</div>
+      <div class="instrument-name">Surface Plate</div>
+      <div class="instrument-desc">Precision granite surface plate for flatness and datum referencing during inspection.</div>
+      <span class="instrument-spec">Reference Standard</span>
+    </div>
+    <div class="instrument-card">
+      <div class="instrument-icon">📏</div>
+      <div class="instrument-name">Vernier Height Gauge</div>
+      <div class="instrument-desc">High-precision height gauges for measuring vertical dimensions and step heights accurately.</div>
+      <span class="instrument-spec">Height Measurement</span>
+    </div>
+    <div class="instrument-card">
+      <div class="instrument-icon">🔭</div>
+      <div class="instrument-name">Micrometers</div>
+      <div class="instrument-desc">Outside micrometers for precise measurement of outer diameters and thicknesses to 0.001mm resolution.</div>
+      <span class="instrument-spec">0.001mm Resolution</span>
+    </div>
+    <div class="instrument-card">
+      <div class="instrument-icon">📊</div>
+      <div class="instrument-name">Digital Verniers</div>
+      <div class="instrument-desc">Digital vernier calipers for fast and accurate measurement of internal, external and depth dimensions.</div>
+      <span class="instrument-spec">Digital Readout</span>
+    </div>
+    <div class="instrument-card">
+      <div class="instrument-icon">🔩</div>
+      <div class="instrument-name">Plug Gauge</div>
+      <div class="instrument-desc">Go/No-Go plug gauges for rapid verification of bore and hole diameters to specification.</div>
+      <span class="instrument-spec">Go / No-Go</span>
+    </div>
+    <div class="instrument-card">
+      <div class="instrument-icon">🔎</div>
+      <div class="instrument-name">Bore Gauge</div>
+      <div class="instrument-desc">Bore gauges in the range 18–35mm for accurate internal diameter measurement of machined bores.</div>
+      <span class="instrument-spec">18 – 35 mm Range</span>
+    </div>
+    <div class="instrument-card">
+      <div class="instrument-icon">⭕</div>
+      <div class="instrument-name">Ring Gauge</div>
+      <div class="instrument-desc">Precision ring gauges for checking the accuracy of turned outer diameters and threaded features.</div>
+      <span class="instrument-spec">OD Verification</span>
+    </div>
+    <div class="instrument-card">
+      <div class="instrument-icon">〰️</div>
+      <div class="instrument-name">Filler Gauge</div>
+      <div class="instrument-desc">Feeler/filler gauges for checking clearances, gaps and surface straightness on machined parts.</div>
+      <span class="instrument-spec">Gap Measurement</span>
+    </div>
+  </div>
+</div>
+
+<!-- QC PROCESS -->
+<div class="qc-process">
+  <div class="section-label">Inspection Workflow</div>
+  <h2 class="section-title">Quality <em>Process</em></h2>
+  <div class="qc-flow">
+    <div class="qc-step">
+      <div class="qc-step-num">01</div>
+      <div class="qc-step-title">Incoming Material</div>
+      <div class="qc-step-text">Raw steel inspected for chemical and physical compliance before production begins</div>
+    </div>
+    <div class="qc-step">
+      <div class="qc-step-num">02</div>
+      <div class="qc-step-title">In-Process Check</div>
+      <div class="qc-step-text">Dimensional checks during machining to catch deviations early in the process</div>
+    </div>
+    <div class="qc-step">
+      <div class="qc-step-num">03</div>
+      <div class="qc-step-title">Final Inspection</div>
+      <div class="qc-step-text">100% inspection using gauges, micrometers and surface tools before dispatch</div>
+    </div>
+    <div class="qc-step">
+      <div class="qc-step-num">04</div>
+      <div class="qc-step-title">Surface Treatment</div>
+      <div class="qc-step-text">Zinc plating verified for coverage and adhesion on all alloy steel products</div>
+    </div>
+    <div class="qc-step">
+      <div class="qc-step-num">05</div>
+      <div class="qc-step-title">Packaging QC</div>
+      <div class="qc-step-text">Packaging reviewed to ensure parts are protected and meet customer requirements</div>
+    </div>
+  </div>
+</div>
+
+<!-- COMMITMENT -->
+<div class="commitment-section">
+  <div class="section-label">Our Promise</div>
+  <h2 class="section-title">Our Quality <em>Commitment</em></h2>
+  <div class="commitment-grid">
+    <div class="commit-card">
+      <div class="commit-icon">🌍</div>
+      <div class="commit-title">International Standards</div>
+      <p class="commit-text">Our quality systems are aligned with the best standards in the world. We benchmark our processes against international requirements to ensure our products are accepted globally — in both domestic and export markets.</p>
+    </div>
+    <div class="commit-card">
+      <div class="commit-icon">👨‍🔬</div>
+      <div class="commit-title">Qualified Inspectors</div>
+      <p class="commit-text">Our quality team consists of technically educated and qualified inspectors who oversee every stage of the manufacturing process — from raw material receipt through to final dispatch. Nothing leaves our facility unchecked.</p>
+    </div>
+    <div class="commit-card">
+      <div class="commit-icon">📦</div>
+      <div class="commit-title">Customer-Specific Packaging</div>
+      <p class="commit-text">We understand that quality extends beyond the part itself. Our packaging is designed and executed as per each customer's specific requirements, ensuring products arrive safely and ready for use.</p>
+    </div>
+    <div class="commit-card">
+      <div class="commit-icon">🔄</div>
+      <div class="commit-title">Continuous Improvement</div>
+      <p class="commit-text">Quality culture at RDA means constantly improving our processes, calibrating our instruments and staying current with industry best practices. We grow with our customers' requirements.</p>
+    </div>
+  </div>
+</div>
+
+<footer>
+  <div class="footer-grid">
+    <div>
+      <div class="footer-logo" style="display:flex;align-items:center;gap:12px;margin-bottom:12px;">
+        <img src="rda-logo.jpeg" alt="RDA Logo" style="width:48px;height:48px;border-radius:50%;border:1px solid #2a3d5e;object-fit:cover;" />
+        <div>
+          <div style="font-family:Bebas Neue,sans-serif;font-size:26px;letter-spacing:4px;color:#e0e8f5;line-height:1;">RDA</div>
+          <div style="font-family:Barlow Condensed,sans-serif;font-size:9px;letter-spacing:3px;color:#6a7f9a;font-weight:600;text-transform:uppercase;">Industries</div>
+        </div>
+      </div>
+      <p class="footer-desc">A reliable manufacturer of auto parts, tractor parts and precision components. Hoshiarpur, Punjab, India.</p>
+    </div>
+    <div>
+      <div class="footer-heading">Navigation</div>
+      <ul class="footer-links">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="about.html">About Us</a></li>
+        <li><a href="products.html">Products</a></li>
+        <li><a href="machinery.html">Machinery</a></li>
+        <li><a href="quality.html">Quality</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+    </div>
+    <div>
+      <div class="footer-heading">Contact</div>
+      <div class="footer-contact-item">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 9.81 19.79 19.79 0 01.01 1.18 2 2 0 012 .02h3a2 2 0 012 1.72 12.84 12.84 0 00.7 2.81 2 2 0 01-.45 2.11L6.09 7.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45 12.84 12.84 0 002.81.7A2 2 0 0122 14.92z"/></svg>
+        +91 98148 72745
+      </div>
+      <div class="footer-contact-item">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+        <a href="mailto:rajat.dhiman@rdaindustries.co.in">rajat.dhiman@rdaindustries.co.in</a>
+      </div>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span>© 2025 RDA Industries. All rights reserved.</span>
+    <span>Hoshiarpur · Punjab · India</span>
+  </div>
+</footer>
+
+<script>
+  function toggleNav() { document.getElementById('navLinks').classList.toggle('open'); }
+  window.addEventListener('scroll', () => {
+    document.getElementById('navbar').style.background =
+      window.scrollY > 20 ? 'rgba(10,14,26,0.98)' : 'rgba(10,14,26,0.92)';
+  });
+</script>
+</body>
+</html>
